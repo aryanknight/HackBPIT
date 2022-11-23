@@ -1,0 +1,52 @@
+.records-cont {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.records {
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  overflow: hidden;
+  padding: 1rem 0rem;
+}
+
+.records-cont-1 {
+  width: 100%;
+}
+
+.record-box{
+    width: 100%;
+    background: rgba(0, 0, 0, 0.03);
+    box-shadow: 1px 1px 18px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(100px);
+    /* Note: backdrop-filter has minimal browser support */
+    padding: 1rem;
+    border-radius: 16px;
+}
+
+.record-box-head{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 40px;
+}
+
+.record-text{
+
+}
+
+.ant-table-row .ant-table-row-level-0{
+    background-color: aqua !important;
+}
+
+.record-btn{
+    background-color: #0AC5A8;
+    color: white;
+    padding: 1rem;
+}
