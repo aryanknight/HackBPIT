@@ -1,0 +1,50 @@
+.objective-cont {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.objective {
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.objective-cont-1{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 120px;
+}
+
+.objective-border{
+    padding: 1rem;
+    width: 70%;
+    display: flex;
+    align-items: center;
+}
+
+.objective-text-cont{
+    background: rgba(0, 0, 0, 0.03);
+    backdrop-filter: blur(100px);
+    border-radius: 16px;
+    width: 100%;
+    padding: 1rem;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.objective-img-cont{
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.objevtive-img{
+    width: 60%;
+}
