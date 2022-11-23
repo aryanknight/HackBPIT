@@ -1,0 +1,55 @@
+.diagnose-cont {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.diagnose {
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  overflow: hidden;
+  padding: 1rem 0rem;
+}
+
+.diagnose-cont-1 {
+  width: 100%;
+}
+
+.diagnose-text-cont {
+  width: 100%;
+  padding: 1rem 0rem;
+  font-size: 20px;
+  color: #434343;
+  margin-bottom: 40px;
+}
+
+.diagnose-box-cont {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.03);
+  box-shadow: 1px 1px 18px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(100px);
+    display: flex;
+    flex-wrap: wrap;
+align-items: flex-start;
+  border-radius: 16px;
+  margin-bottom: 60px;
+}
+
+.diagnose-box-cont-1{
+    width: 50%;
+    padding: 1rem;
+}
+.diagnose-box-cont-2{
+    width: 100%;
+    padding: 1rem;
+}
+.input-title{
+    font-size: 18px;
+    color: rgba(0, 0, 0, 0.588);
+    margin-left: 6px;
+    margin-bottom: 6px;
+}
