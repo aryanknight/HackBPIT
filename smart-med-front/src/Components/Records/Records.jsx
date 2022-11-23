@@ -1,5 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Input, InputNumber, Radio, Space, Table, Tabs, Tag } from "antd";
+import {
+  Input,
+  InputNumber,
+  Radio,
+  Space,
+  Table,
+  Tabs,
+  Tag,
+  Button,
+  Modal,
+} from "antd";
 import "./Records.css";
 import { ethers } from "ethers";
 import { abi, contractAddress } from "../constants/constant.js";
@@ -12,6 +22,16 @@ const client = new Web3Storage({ token: apiToken });
 
 export default function Records() {
   const [recordsData, setRecordsData] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     (async () => {
@@ -68,6 +88,7 @@ export default function Records() {
             },
           ]);
         });
+        handleCancel();
         console.log(recordsData);
       } catch (error) {
         console.log(error);
@@ -150,19 +171,29 @@ export default function Records() {
                 <br />
                 Record History
               </div>
-              <div className="record-submit">
-                <button
-                  onClick={(e) => {
-                    handleUpload(e);
-                  }}
-                >
-                  Submit
-                </button>
-              </div>
-              <div className="record-upload-cont">
-                <label for="file">Choose file to upload</label>
-                <input type="file" id="input" name="file" />
-              </div>
+              <Button type="primary" onClick={showModal}>
+                Upload Documents
+              </Button>
+              <Modal
+                title="Upload"
+                open={isModalOpen}
+                onOk={handleOk}
+                onCancel={handleCancel}
+              >
+                <div className="record-submit">
+                  <div className="record-upload-cont">
+                    <label for="file">Choose file to upload</label>
+                    <input type="file" id="input" name="file" />
+                  </div>
+                  <button
+                    onClick={(e) => {
+                      handleUpload(e);
+                    }}
+                  >
+                    Submit
+                  </button>
+                </div>
+              </Modal>
             </div>
             <Table columns={columns} dataSource={recordsData} />
           </div>
