@@ -10,20 +10,36 @@ const apiToken =
 const client = new Web3Storage({ token: apiToken });
 
 function Forms() {
-  const [recordsHash, setRecordsHash] = useState([]);
-  const [fileName, setFileName] = useState("");
+  const [recordsData, setRecordsData] = useState([
+    {
+      hash: "",
+      fileName: "",
+    },
+  ]);
+
   useEffect(() => {
     (async () => {
       const accounts = await ethereum.request({ method: "eth_accounts" });
-
       const provider = new ethers.providers.Web3Provider(ethereum);
       const signer = await provider.getSigner();
       const contract = new ethers.Contract(contractAddress, abi, signer);
+      const count = await contract.getCount();
+      console.log(count);
       console.log(accounts.length);
-      if (accounts.length > 0) {
+      if (accounts.length > 0 && count > 0) {
         const updatedHash = await contract.get();
         console.log(updatedHash);
-        setRecordsHash(updatedHash);
+        updatedHash.map(async (hash) => {
+          const res = await client.get(hash);
+          console.log(hash);
+          const files = await res.files();
+          console.log(files[0].name);
+          setRecordsData([
+            ...recordsData,
+            { hash: hash, fileName: files[0].name },
+          ]);
+        });
+        console.log(recordsData);
       }
     })();
   }, []);
@@ -41,13 +57,20 @@ function Forms() {
         console.log(rootCid);
         const res = await client.get(rootCid);
         const files = await res.files();
-        setFileName(files[0].name);
         const setHash = await contract.set(rootCid);
         await setHash.wait(1);
         const updatedHash = await contract.get();
-        setRecordsHash([...updatedHash]);
         console.log(updatedHash);
-        console.log(recordsHash);
+        updatedHash.map(async (hash) => {
+          const res = await client.get(hash);
+          const files = await res.files();
+          console.log(files[0].name);
+          setRecordsData([
+            ...recordsData,
+            { hash: hash, fileName: files[0].name },
+          ]);
+        });
+        console.log(recordsData);
       } catch (error) {
         console.log(error);
       }
@@ -68,8 +91,8 @@ function Forms() {
       <div>
         <button onClick={handleUpload}>Submit</button>
       </div>
-      {recordsHash.length > 0 &&
-        recordsHash.map((hash, id) => (
+      {recordsData.length > 0 &&
+        recordsData.map(({ hash, fileName }, id) => (
           <div
             style={{
               width: "100%",
@@ -84,10 +107,10 @@ function Forms() {
                 marginRight: "10px",
               }}
             >
-              {hash}
+              {fileName}
             </h3>
             <a
-              href={`https://${hash}.ipfs.w3s.link/`}
+              href={`https://${hash}.ipfs.w3s.link/${fileName}`}
               target="_blank"
               style={{
                 marginLeft: "10px",
