@@ -12,23 +12,6 @@ async function main() {
         await record.deployTransaction.wait(6)
         await verify(record.address, [])
     }
-    const getHash = await record.get()
-    console.log(getHash)
-    const getCount = await record.getCount()
-    console.log(getCount)
-    const setHash = await record.set("101")
-    await setHash.wait(1)
-    const updatedHash = await record.get()
-
-    console.log(updatedHash)
-    const setHash2 = await record.set("102")
-    await setHash2.wait(1)
-    const updatedHash2 = await record.get()
-
-    console.log(updatedHash2)
-    const updatedHashCount = await record.getCount()
-
-    console.log(updatedHashCount)
 }
 async function verify(contractAddress, args) {
     console.log("Verifying ....")
