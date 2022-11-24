@@ -53,3 +53,14 @@ align-items: flex-start;
     margin-left: 6px;
     margin-bottom: 6px;
 }
+
+.diag-submit-btn{
+  background-color: #0AC5A8;
+  color: white;
+  padding: 1rem 2rem;
+  background: #0AC5A8;
+  border-radius: 8px;
+  font-size: 20px;
+  outline: none;
+  border: none;
+}

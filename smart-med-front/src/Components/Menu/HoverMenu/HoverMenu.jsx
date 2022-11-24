@@ -29,20 +29,20 @@ export default function HoverMenu() {
   return (
     <div className="hover-menu">
       <div className="hover-menu-cont">
-        <Link to={"/"} target="_blank">
+        <Link to={"/"} >
           <Mitem4
             className="hover-item"
             style={{ width: "20px", height: "20px" }}
           />
         </Link>
-        <Link to={"/diagnose"} target="_blank">
-          <Mitem1
+        <Link to={"/diagnose"} >
+          <Mitem3
             className="hover-item"
             style={{ width: "20px", height: "20px" }}
           />
         </Link>
-        <a href="/records" target="_blank">
-          <Mitem3
+        <a href="/records" >
+          <Mitem1
             className="hover-item"
             style={{ width: "20px", height: "20px" }}
           />

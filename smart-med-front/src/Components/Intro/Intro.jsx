@@ -60,7 +60,19 @@ export function Intro2() {
                 <span style={{fontWeight:'bold'}}> SmartMed</span>
               </div>
               <div className="intro-text-2">
-                Whenever and wherever needed
+              <Typewriter
+              options={{
+                strings: [
+                  "In managing patients reports",
+                  "By Providing seamless healthcare",
+                  "Whenever and wherever needed",
+                ],
+                autoStart: true,
+                loop: true,
+                delay: 50,
+                deleteSpeed: 30,
+              }}
+            />
               </div>
             </div>
           </div>

@@ -3,6 +3,7 @@ import Obj1 from '../../Images/obj-img-1.svg';
 import Obj2 from '../../Images/obj-img-2.svg';
 import Obj3 from '../../Images/obj-img-3.svg';
 import Obj4 from '../../Images/obj-img-4.svg';
+import Home from '../../Images/home-img.svg';
 import './Objective.css';
 
 export default function Objective() {
@@ -42,6 +43,8 @@ export default function Objective() {
                 <img src={Obj4} className="objevtive-img" />
             </div>
           </div>
+
+          <img src={Home} className="workflow-img"/>
         </div>
       </div>
     </div>
