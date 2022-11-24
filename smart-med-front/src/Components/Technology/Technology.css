@@ -1,0 +1,49 @@
+.techno-cont {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+  
+  .techno {
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .techno-cont-1{
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 120px;
+  }
+
+  .techno-head{
+    width: 100%;
+    padding: 1rem;
+    color: #0AC5A8;
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 80px;
+    margin-bottom: 40px;
+
+}
+
+
+.techno-img-cont{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 80px;
+}
+
+
+.techno-img{
+    width: 80%;
+}
+
