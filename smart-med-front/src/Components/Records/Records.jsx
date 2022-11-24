@@ -122,6 +122,7 @@ export default function Records() {
         <a
           href={`https://${record.hash}.ipfs.w3s.link/${record.fileName}`}
           target="_blank"
+          style={{ color: "#13a498" }}
         >
           View
         </a>
@@ -171,7 +172,10 @@ export default function Records() {
                 <br />
                 Record History
               </div>
-              <Button type="primary" onClick={showModal}>
+              <Button
+                onClick={showModal}
+                style={{ backgroundColor: "#13a498", color: "#ffffff" }}
+              >
                 Upload Documents
               </Button>
               <Modal
@@ -189,6 +193,7 @@ export default function Records() {
                     onClick={(e) => {
                       handleUpload(e);
                     }}
+                    style={{ marginTop: "15px" }}
                   >
                     Submit
                   </button>
