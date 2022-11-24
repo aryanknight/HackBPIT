@@ -1,4 +1,5 @@
 import React from "react";
+import axios from 'axios';
 import { Input, InputNumber, Radio, Tabs } from "antd";
 import "./Diagnose.css";
 
@@ -7,7 +8,7 @@ export default function Diagnose() {
   const [cervicalValue, setCervicalValue] = React.useState({
     age: 0,
     partners: 0,
-    age_sex:0,
+    age_sex: 0,
     preg: 0,
     smoke: 0,
     year_smoke: 0,
@@ -19,6 +20,8 @@ export default function Diagnose() {
     stds: 0,
     num_stds: 0,
     condylomatosis: 0,
+    stds_vaginal_condylomatosis: 0,
+    stds_vulvo_perineal_condylomatosis: 0,
     syphilis: 0,
     pelvic: 0,
     herpes: 0,
@@ -30,12 +33,44 @@ export default function Diagnose() {
     diag_cancer: 0,
     diag_cin: 0,
     diag_hpv: 0,
-    diag_other: 0,
   });
-  const onChange = (e) => {
-    console.log("radio checked", e.target.value);
-    setValue(e.target.value);
+
+  const  predict =async () => {
+
+    const data = {
+      age: cervicalValue.age,
+      number_of_sexual_partners: cervicalValue.partners,
+      first_sexual_intercourse: cervicalValue.age_sex,
+      num_of_pregnancies: cervicalValue.preg,
+      smokes: cervicalValue.smoke,
+      smokes_years: cervicalValue.year_smoke,
+      smokes_packs_year: cervicalValue.pack_smoke,
+      hormonal_contraceptives: cervicalValue.hormonal_contra,
+      hormonal_contraceptives_years: cervicalValue.year_contra,
+      iud: cervicalValue.iud,
+      iud_years: cervicalValue.year_iud,
+      stds: cervicalValue.stds,
+      stds_number: cervicalValue.num_stds,
+      stds_condylomatosis: cervicalValue.condylomatosis,
+      stds_vaginal_condylomatosis: cervicalValue.stds_vaginal_condylomatosis,
+      stds_vulvo_perineal_condylomatosis: cervicalValue.stds_vulvo_perineal_condylomatosis,
+      stds_genital_herpes: cervicalValue.herpes,
+      stds_molluscum_contagiosum: cervicalValue.contagiosum,
+      stds_syphilis: cervicalValue.syphilis,
+      stds_pelvic_inflammatory_disease: cervicalValue.pelvic,
+      stds_hiv: cervicalValue.hiv,
+      stds_hepatitis_b: cervicalValue.hepatitis,
+      stds_hpv: cervicalValue.hpv,
+      stds_number_of_diagnosis: cervicalValue.num_diag_stds,
+      dx_cancer: cervicalValue.diag_cancer,
+      dx_cin: cervicalValue.diag_cin,
+      dx_hpv: cervicalValue.diag_hpv,
+    };
+    console.log(data)
+    const res=await axios.post("http://localhost:8000/cervical_cancer_prediction",JSON.stringify(data))
+    console.log(res.data)
   };
+
   return (
     <div className="diagnose-cont">
       <div className="container-medium">
@@ -93,7 +128,9 @@ export default function Diagnose() {
                       placeholder="Age"
                       defaultValue={cervicalValue.age}
                       style={{ width: "100%" }}
-                      onChange={(val)=>setCervicalValue({...cervicalValue,age:val})}
+                      onChange={(val) =>
+                        setCervicalValue({ ...cervicalValue, age: val })
+                      }
                     />
                   </div>
                   <div className="diagnose-box-cont-1">
@@ -103,7 +140,9 @@ export default function Diagnose() {
                       placeholder="Age"
                       defaultValue={0}
                       style={{ width: "100%" }}
-                      onChange={(val)=>setCervicalValue({...cervicalValue,partners:val})}
+                      onChange={(val) =>
+                        setCervicalValue({ ...cervicalValue, partners: val })
+                      }
                     />
                   </div>
                   <div className="diagnose-box-cont-1">
@@ -115,7 +154,9 @@ export default function Diagnose() {
                       placeholder="Age"
                       defaultValue={0}
                       style={{ width: "100%" }}
-                      onChange={(val)=>setCervicalValue({...cervicalValue,age_sex:val})}
+                      onChange={(val) =>
+                        setCervicalValue({ ...cervicalValue, age_sex: val })
+                      }
                     />
                   </div>
                   <div className="diagnose-box-cont-1">
@@ -125,7 +166,9 @@ export default function Diagnose() {
                       placeholder="Age"
                       defaultValue={0}
                       style={{ width: "100%" }}
-                      onChange={(val)=>setCervicalValue({...cervicalValue,preg:val})}
+                      onChange={(val) =>
+                        setCervicalValue({ ...cervicalValue, preg: val })
+                      }
                     />
                   </div>
                 </div>
@@ -133,7 +176,14 @@ export default function Diagnose() {
                 <div className="diagnose-box-cont">
                   <div className="diagnose-box-cont-2">
                     <div className="input-title">Do you smoke : </div>
-                    <Radio.Group onChange={(val)=>setCervicalValue({...cervicalValue,smoke:val.target.value})} >
+                    <Radio.Group
+                      onChange={(val) =>
+                        setCervicalValue({
+                          ...cervicalValue,
+                          smoke: val.target.value,
+                        })
+                      }
+                    >
                       <Radio value={1}>Yes</Radio>
                       <Radio value={0}>No</Radio>
                     </Radio.Group>
@@ -147,7 +197,9 @@ export default function Diagnose() {
                       placeholder="Age"
                       defaultValue={0}
                       style={{ width: "100%" }}
-                      onChange={(val)=>setCervicalValue({...cervicalValue,year_smoke:val})}
+                      onChange={(val) =>
+                        setCervicalValue({ ...cervicalValue, year_smoke: val })
+                      }
                     />
                   </div>
                   <div className="diagnose-box-cont-1">
@@ -159,7 +211,9 @@ export default function Diagnose() {
                       placeholder="Age"
                       defaultValue={0}
                       style={{ width: "100%" }}
-                      onChange={(val)=>setCervicalValue({...cervicalValue,pack_smoke:val})}
+                      onChange={(val) =>
+                        setCervicalValue({ ...cervicalValue, pack_smoke: val })
+                      }
                     />
                   </div>
                 </div>
@@ -169,7 +223,14 @@ export default function Diagnose() {
                     <div className="input-title">
                       Do you take any hormonal contraceptives? :{" "}
                     </div>
-                    <Radio.Group onChange={(val)=>setCervicalValue({...cervicalValue,hormonal_contra:val.target.value})}>
+                    <Radio.Group
+                      onChange={(val) =>
+                        setCervicalValue({
+                          ...cervicalValue,
+                          hormonal_contra: val.target.value,
+                        })
+                      }
+                    >
                       <Radio value={1}>Yes</Radio>
                       <Radio value={0}>No</Radio>
                     </Radio.Group>
@@ -178,7 +239,14 @@ export default function Diagnose() {
                     <div className="input-title">
                       Do you have any Intra-Urine Devices (IUDs)? :{" "}
                     </div>
-                    <Radio.Group onChange={(val)=>setCervicalValue({...cervicalValue,iud:val.target.value})}>
+                    <Radio.Group
+                      onChange={(val) =>
+                        setCervicalValue({
+                          ...cervicalValue,
+                          iud: val.target.value,
+                        })
+                      }
+                    >
                       <Radio value={1}>Yes</Radio>
                       <Radio value={0}>No</Radio>
                     </Radio.Group>
@@ -192,7 +260,9 @@ export default function Diagnose() {
                       placeholder="Age"
                       defaultValue={0}
                       style={{ width: "100%" }}
-                      onChange={(val)=>setCervicalValue({...cervicalValue,year_contra:val})}
+                      onChange={(val) =>
+                        setCervicalValue({ ...cervicalValue, year_contra: val })
+                      }
                     />
                   </div>
                   <div className="diagnose-box-cont-1">
@@ -202,7 +272,9 @@ export default function Diagnose() {
                       placeholder="Age"
                       defaultValue={0}
                       style={{ width: "100%" }}
-                      onChange={(val)=>setCervicalValue({...cervicalValue,year_iud:val})}
+                      onChange={(val) =>
+                        setCervicalValue({ ...cervicalValue, year_iud: val })
+                      }
                     />
                   </div>
                 </div>
@@ -210,7 +282,14 @@ export default function Diagnose() {
                 <div className="diagnose-box-cont">
                   <div className="diagnose-box-cont-2">
                     <div className="input-title">Do you have any STDs? : </div>
-                    <Radio.Group onChange={(val)=>setCervicalValue({...cervicalValue,stds:val.target.value})}>
+                    <Radio.Group
+                      onChange={(val) =>
+                        setCervicalValue({
+                          ...cervicalValue,
+                          stds: val.target.value,
+                        })
+                      }
+                    >
                       <Radio value={1}>Yes</Radio>
                       <Radio value={0}>No</Radio>
                     </Radio.Group>
@@ -224,21 +303,69 @@ export default function Diagnose() {
                       placeholder="Age"
                       defaultValue={0}
                       style={{ width: "100%" }}
-                      onChange={(val)=>setCervicalValue({...cervicalValue,num_stds:val})}
+                      onChange={(val) =>
+                        setCervicalValue({ ...cervicalValue, num_stds: val })
+                      }
                     />
                   </div>
                   <div className="diagnose-box-cont-1">
                     <div className="input-title">
                       Do you have condylomatosis? :{" "}
                     </div>
-                    <Radio.Group onChange={(val)=>setCervicalValue({...cervicalValue,condylomatosis:val.target.value})}>
+                    <Radio.Group
+                      onChange={(val) =>
+                        setCervicalValue({
+                          ...cervicalValue,
+                          condylomatosis: val.target.value,
+                        })
+                      }
+                    >
+                      <Radio value={1}>Yes</Radio>
+                      <Radio value={0}>No</Radio>
+                    </Radio.Group>
+                  </div>
+                  <div className="diagnose-box-cont-1">
+                    <div className="input-title">
+                      Do you have vaginal condylomatosis? :{" "}
+                    </div>
+                    <Radio.Group
+                      onChange={(val) =>
+                        setCervicalValue({
+                          ...cervicalValue,
+                          condylomatosis: val.target.value,
+                        })
+                      }
+                    >
+                      <Radio value={1}>Yes</Radio>
+                      <Radio value={0}>No</Radio>
+                    </Radio.Group>
+                  </div>
+                  <div className="diagnose-box-cont-1">
+                    <div className="input-title">
+                      Do you have vulvao perineal condylomatosis? :{" "}
+                    </div>
+                    <Radio.Group
+                      onChange={(val) =>
+                        setCervicalValue({
+                          ...cervicalValue,
+                          condylomatosis: val.target.value,
+                        })
+                      }
+                    >
                       <Radio value={1}>Yes</Radio>
                       <Radio value={0}>No</Radio>
                     </Radio.Group>
                   </div>
                   <div className="diagnose-box-cont-1">
                     <div className="input-title">Do you have syphilis? : </div>
-                    <Radio.Group onChange={(val)=>setCervicalValue({...cervicalValue,syphilis:val.target.value})}>
+                    <Radio.Group
+                      onChange={(val) =>
+                        setCervicalValue({
+                          ...cervicalValue,
+                          syphilis: val.target.value,
+                        })
+                      }
+                    >
                       <Radio value={1}>Yes</Radio>
                       <Radio value={0}>No</Radio>
                     </Radio.Group>
@@ -247,7 +374,14 @@ export default function Diagnose() {
                     <div className="input-title">
                       Do you have any pelvic inflamatory disease? :{" "}
                     </div>
-                    <Radio.Group onChange={(val)=>setCervicalValue({...cervicalValue,pelvic:val.target.value})}>
+                    <Radio.Group
+                      onChange={(val) =>
+                        setCervicalValue({
+                          ...cervicalValue,
+                          pelvic: val.target.value,
+                        })
+                      }
+                    >
                       <Radio value={1}>Yes</Radio>
                       <Radio value={0}>No</Radio>
                     </Radio.Group>
@@ -256,7 +390,14 @@ export default function Diagnose() {
                     <div className="input-title">
                       Do you have genital herpes? :{" "}
                     </div>
-                    <Radio.Group onChange={(val)=>setCervicalValue({...cervicalValue,herpes:val.target.value})}>
+                    <Radio.Group
+                      onChange={(val) =>
+                        setCervicalValue({
+                          ...cervicalValue,
+                          herpes: val.target.value,
+                        })
+                      }
+                    >
                       <Radio value={1}>Yes</Radio>
                       <Radio value={0}>No</Radio>
                     </Radio.Group>
@@ -265,14 +406,28 @@ export default function Diagnose() {
                     <div className="input-title">
                       Do you have molluscum contagiosum? :{" "}
                     </div>
-                    <Radio.Group onChange={(val)=>setCervicalValue({...cervicalValue,contagiosum:val.target.value})}>
+                    <Radio.Group
+                      onChange={(val) =>
+                        setCervicalValue({
+                          ...cervicalValue,
+                          contagiosum: val.target.value,
+                        })
+                      }
+                    >
                       <Radio value={1}>Yes</Radio>
                       <Radio value={0}>No</Radio>
                     </Radio.Group>
                   </div>
                   <div className="diagnose-box-cont-1">
                     <div className="input-title">Do you have HIV? : </div>
-                    <Radio.Group onChange={(val)=>setCervicalValue({...cervicalValue,hiv:val.target.value})}>
+                    <Radio.Group
+                      onChange={(val) =>
+                        setCervicalValue({
+                          ...cervicalValue,
+                          hiv: val.target.value,
+                        })
+                      }
+                    >
                       <Radio value={1}>Yes</Radio>
                       <Radio value={0}>No</Radio>
                     </Radio.Group>
@@ -281,7 +436,14 @@ export default function Diagnose() {
                     <div className="input-title">
                       Do you have HepatitisB? :{" "}
                     </div>
-                    <Radio.Group onChange={(val)=>setCervicalValue({...cervicalValue,hepatitis:val.target.value})}>
+                    <Radio.Group
+                      onChange={(val) =>
+                        setCervicalValue({
+                          ...cervicalValue,
+                          hepatitis: val.target.value,
+                        })
+                      }
+                    >
                       <Radio value={1}>Yes</Radio>
                       <Radio value={0}>No</Radio>
                     </Radio.Group>
@@ -290,7 +452,14 @@ export default function Diagnose() {
                     <div className="input-title">
                       Do you have Human Papillomavirus (HPV)? :{" "}
                     </div>
-                    <Radio.Group onChange={(val)=>setCervicalValue({...cervicalValue,hpv:val.target.value})}>
+                    <Radio.Group
+                      onChange={(val) =>
+                        setCervicalValue({
+                          ...cervicalValue,
+                          hpv: val.target.value,
+                        })
+                      }
+                    >
                       <Radio value={1}>Yes</Radio>
                       <Radio value={0}>No</Radio>
                     </Radio.Group>
@@ -304,7 +473,12 @@ export default function Diagnose() {
                       placeholder="Age"
                       defaultValue={0}
                       style={{ width: "100%" }}
-                      onChange={(val)=>setCervicalValue({...cervicalValue,num_diag_stds:val})}
+                      onChange={(val) =>
+                        setCervicalValue({
+                          ...cervicalValue,
+                          num_diag_stds: val,
+                        })
+                      }
                     />
                   </div>
                 </div>
@@ -314,7 +488,14 @@ export default function Diagnose() {
                     <div className="input-title">
                       Have you ever had a diagnosis of cancer? :{" "}
                     </div>
-                    <Radio.Group onChange={(val)=>setCervicalValue({...cervicalValue,diag_cancer:val.target.value})}>
+                    <Radio.Group
+                      onChange={(val) =>
+                        setCervicalValue({
+                          ...cervicalValue,
+                          diag_cancer: val.target.value,
+                        })
+                      }
+                    >
                       <Radio value={1}>Yes</Radio>
                       <Radio value={0}>No</Radio>
                     </Radio.Group>
@@ -323,7 +504,14 @@ export default function Diagnose() {
                     <div className="input-title">
                       Have you ever had diagnosis of CIN? :{" "}
                     </div>
-                    <Radio.Group onChange={(val)=>setCervicalValue({...cervicalValue,diag_cin:val.target.value})}>
+                    <Radio.Group
+                      onChange={(val) =>
+                        setCervicalValue({
+                          ...cervicalValue,
+                          diag_cin: val.target.value,
+                        })
+                      }
+                    >
                       <Radio value={1}>Yes</Radio>
                       <Radio value={0}>No</Radio>
                     </Radio.Group>
@@ -332,7 +520,14 @@ export default function Diagnose() {
                     <div className="input-title">
                       Have you ever had a diagnosis of HPV? :{" "}
                     </div>
-                    <Radio.Group onChange={(val)=>setCervicalValue({...cervicalValue,diag_hpv:val.target.value})}>
+                    <Radio.Group
+                      onChange={(val) =>
+                        setCervicalValue({
+                          ...cervicalValue,
+                          diag_hpv: val.target.value,
+                        })
+                      }
+                    >
                       <Radio value={1}>Yes</Radio>
                       <Radio value={0}>No</Radio>
                     </Radio.Group>
@@ -341,12 +536,20 @@ export default function Diagnose() {
                     <div className="input-title">
                       Diagnosed with other major reproductive issue? :{" "}
                     </div>
-                    <Radio.Group onChange={(val)=>setCervicalValue({...cervicalValue,diag_other:val.target.value})}>
+                    <Radio.Group
+                      onChange={(val) =>
+                        setCervicalValue({
+                          ...cervicalValue,
+                          diag_other: val.target.value,
+                        })
+                      }
+                    >
                       <Radio value={1}>Yes</Radio>
                       <Radio value={0}>No</Radio>
                     </Radio.Group>
                   </div>
                 </div>
+                <button onClick={predict}>submit</button>
               </div>
             </Tabs.TabPane>
             <Tabs.TabPane tab="PCOS" key="2">
