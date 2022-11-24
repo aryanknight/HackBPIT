@@ -4,6 +4,7 @@ import { ReactComponent as Mitem1 } from "../../../Images/menuitem1.svg";
 import { ReactComponent as Mitem2 } from "../../../Images/menuitem2.svg";
 import { ReactComponent as Mitem3 } from "../../../Images/menuitem3.svg";
 import { ReactComponent as Mitem4 } from "../../../Images/menuitem4.svg";
+import { ReactComponent as Mitem5 } from "../../../Images/metamask.svg";
 import { Link } from "react-router-dom";
 const { ethereum } = window;
 
@@ -40,18 +41,18 @@ export default function HoverMenu() {
             style={{ width: "20px", height: "20px" }}
           />
         </Link>
+        <a href="/records" target="_blank">
+          <Mitem3
+            className="hover-item"
+            style={{ width: "20px", height: "20px" }}
+          />
+        </a>
         <a
           onClick={(e) => {
             connect(e);
           }}
         >
-          <Mitem2
-            className="hover-item"
-            style={{ width: "20px", height: "20px" }}
-          />
-        </a>
-        <a href="https://medium.com/@multipad.official" target="_blank">
-          <Mitem3
+          <Mitem5
             className="hover-item"
             style={{ width: "20px", height: "20px" }}
           />
