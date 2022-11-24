@@ -1,6 +1,6 @@
-import React from "react";
+import React,{useState} from "react";
 import axios from "axios";
-import { Input, InputNumber, Radio, Tabs } from "antd";
+import { Input, InputNumber, Modal, Radio, Tabs } from "antd";
 import "./Diagnose.css";
 
 export default function Diagnose() {
@@ -74,10 +74,27 @@ export default function Diagnose() {
     console.log(res.data);
   };
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div className="diagnose-cont">
       <div className="container-medium" style={{overflow:'visible'}}>
         <div className="diagnose" style={{overflow:'visible'}}>
+          <Modal title="Predict Disease Possibility" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+            <div style={{fontSize:'18px'}}>
+            The Machine Learning Model has been created but not deployed, please check the ML and ML Model Folder
+            </div>
+             
+        </Modal>
           <Tabs defaultActiveKey="1" size="large" style={{ color: "#686868" }}>
             <Tabs.TabPane tab="Cervical Cancer" key="1">
               <div className="diagnose-cont-1">
@@ -552,7 +569,7 @@ export default function Diagnose() {
                     </Radio.Group>
                   </div>
                 </div>
-                <button className="diag-submit-btn">Predict Possibility of Cervical Cancer</button>
+                <button onClick={showModal} className="diag-submit-btn">Predict Possibility of Cervical Cancer</button>
               </div>
             </Tabs.TabPane>
 
@@ -1014,7 +1031,7 @@ export default function Diagnose() {
                     </Radio.Group>
                   </div>
                 </div>
-                <button className="diag-submit-btn">Predict Possibility of PCOS</button>
+                <button onClick={showModal} className="diag-submit-btn">Predict Possibility of PCOS</button>
               </div>
             </Tabs.TabPane>
 
@@ -1485,7 +1502,7 @@ export default function Diagnose() {
                     </Radio.Group>
                   </div>
                 </div>
-                <button className="diag-submit-btn">Predict Possibility of Breast Cancer</button>
+                <button onClick={showModal} className="diag-submit-btn">Predict Possibility of Breast Cancer</button>
               </div>
             </Tabs.TabPane>
           </Tabs>
